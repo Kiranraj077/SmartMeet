@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# AI Agents for Generating Meet Summaries, & Composing and Sending Emails
+
+The AI Agent uses [Ollama](https://ollama.com/) + [CrewAI](https://github.com/joaomdmoura/crewai) for doing the task of generating the summary of the meet, composing emails and sending them to specific people.
+The AI Agent files can be found inside [server](https://github.com/Kiranraj077/SmartMeet/tree/master/server)
