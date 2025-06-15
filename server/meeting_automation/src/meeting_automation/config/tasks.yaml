@@ -1,0 +1,44 @@
+extract_tasks:
+  description: >
+    Analyze the meeting transcript (which could be in JSON or plain text).
+    Your job is to:
+    - Summarize the main discussion points of the meeting
+    - Extract all actionable items from the transcript
+    - Assign each task to the correct person using the provided email mapping
+    - Format the output as a JSON like this:
+
+    {
+      "summary": "Short paragraph summary...",
+      "tasks": [
+        {
+          "email": "alice@example.com",
+          "assigned_tasks": ["Finish the API by Monday"]
+        }
+      ]
+    }
+
+    Inputs:
+    {transcript_input}
+  expected_output: >
+    JSON including a short summary and each person's assigned tasks (as a list).
+
+compose_emails:
+  description: >
+    Based on the structured JSON containing the meeting summary and the list of participants with their assigned tasks,
+    draft a personalized follow-up email for each participant.
+
+    Each email must include:
+    - A professional greeting (use their name)
+    - A 2–3 sentence meeting summary
+    - A bulleted list of the tasks specifically assigned to them
+    - A polite closing with a "let me know if you have questions" type phrase
+
+    Format the emails using clean text with Times New Roman styling and bold for section headings like 'Summary' and 'Action Items'.
+
+    Input:
+    {task_json_output}
+  expected_output: >
+    A dictionary mapping email addresses to full email text:
+    {
+      "alice@example.com": "Dear Alice,\n\nHere's a summary...\n\nAction Items:\n- Do this\n- Do that\n\nRegards,\nMeeting Assistant"
+    }

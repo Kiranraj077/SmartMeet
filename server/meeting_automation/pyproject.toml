@@ -1,0 +1,10 @@
+[project]
+name = "meeting_automation"
+version = "0.1.0"
+description = "Automated meeting follow-up using CrewAI"
+authors = ["Your Name <you@example.com>"]
+
+[project.dependencies]
+crewai = "^0.22.0"
+crewai-tools = "^0.1.1"
+numpy = "^2.2.0"
