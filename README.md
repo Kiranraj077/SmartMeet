@@ -70,7 +70,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-# AI Agents for Generating Meet Summaries, & Composing and Sending Emails
+## AI Agents for Generating Meet Summaries, & Composing and Sending Emails
 
-The AI Agent uses [Ollama](https://ollama.com/) + [CrewAI](https://github.com/joaomdmoura/crewai) for doing the task of generating the summary of the meet, composing emails and sending them to specific people.
-The AI Agent files can be found inside [server](https://github.com/Kiranraj077/SmartMeet/tree/master/server)
+The agent files can be found in [server](https://github.com/Kiranraj077/SmartMeet/tree/master/server)
+- Takes a transcript (hardcoded sample or can be extended for `.txt`/`.json` inputs)
+- Extracts a **summary** and identifies **participant-specific action items**
+- Composes **personalized follow-up emails**
+- Optionally sends those emails via SMTP (configurable)
+
+The AI Agent is based on [Ollama](https://ollama.com/), [CrewAI](https://github.com/joaomdmoura/crewai), [Python](https://www.python.org/), [Lanchain-Ollama](https://python.langchain.com/docs/integrations/llms/ollama/)
+
+
+
+This project uses `crewai==0.130.0`, which **does not support YAML config files** or the `crewai create` CLI. If you try to use [agents.yaml](https://github.com/Kiranraj077/SmartMeet/blob/master/server/meeting_automation/src/meeting_automation/config/agents.yaml) and [tasks.yaml](https://github.com/Kiranraj077/SmartMeet/blob/master/server/meeting_automation/src/meeting_automation/config/tasks.yaml), you will face errors.Those features are only available in unreleased development branches, not on PyPI. For this reason, the agent is fully implemented in Python code via [main.py](https://github.com/Kiranraj077/SmartMeet/blob/master/server/meeting_automation/src/meeting_automation/main.py)
