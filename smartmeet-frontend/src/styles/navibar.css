@@ -1,0 +1,30 @@
+.navibar {
+    background-color: #8c9eff;
+    color: white;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navibar-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .navibar-links a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .login-btn {
+    background-color: white;
+    color: #8c9eff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

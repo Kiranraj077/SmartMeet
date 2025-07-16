@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "SmartMeet Caption Scraper",
+  "version": "1.0",
+  "description": "Scrapes captions from Google Meet.",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "host_permissions": ["https://meet.google.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "SmartMeet Scraper"
+  }
+}

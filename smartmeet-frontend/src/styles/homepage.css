@@ -1,0 +1,66 @@
+body{
+    background-color:#8c9eff;
+}
+.hero {
+    background-color: #8c9eff;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .get-started-btn {
+    background-color: white;
+    color: #8c9eff;
+    padding: 12px 24px;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .features {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .features h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .feature-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .feature-grid {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  .logoimg{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 14px;
+    padding: 20px;
+    background-color: #f3f3f3;
+  }

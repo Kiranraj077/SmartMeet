@@ -1,0 +1,71 @@
+.meeting-page {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+.meeting-header {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.meeting-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.meeting-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  transition: transform 0.2s ease;
+}
+
+.meeting-card:hover {
+  transform: translateY(-4px);
+}
+
+.meeting-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.owner {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.meeting-time {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.calendar-icon {
+  margin-right: 6px;
+  color: #555;
+}
+
+.attendees {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  background: #e2e6f0;
+  color: #333;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 8px;
+}
