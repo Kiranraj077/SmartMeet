@@ -1,6 +1,6 @@
-// src/pages/HomePage.jsx
+
 import React from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Import navigate
+import { useNavigate } from "react-router-dom"; 
 import Navibar from "../components/Navibar";
 import FeatureCard from "../components/FeatureCard";
 import "../styles/homepage.css";
@@ -9,7 +9,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
-    navigate("/register"); // ✅ Route to register page
+    navigate("/register"); // 
   };
 
   return (

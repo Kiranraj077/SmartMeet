@@ -7,7 +7,7 @@ export default function Navibar() {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/login"); // ✅ Route to login page
+    navigate("/login"); 
   };
 
   return (

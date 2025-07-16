@@ -1,6 +1,5 @@
 const Transcript = require("../models/Transcript");
 
-// POST /api/transcripts
 const createTranscript = async (req, res) => {
   const { meetingId, speaker, transcript } = req.body;
 
@@ -21,7 +20,7 @@ const createTranscript = async (req, res) => {
   }
 };
 
-// GET /api/transcripts/:meetingId
+
 const getTranscriptsByMeeting = async (req, res) => {
   const { meetingId } = req.params;
 

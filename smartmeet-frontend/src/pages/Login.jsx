@@ -25,7 +25,7 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ Store JWT and user ID
+        
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
 

@@ -19,13 +19,14 @@ const MeetDetails = () => {
         console.warn("❌ No token found. Skipping fetch.");
         return;
       }
+
       if (!meetingId) {
         console.warn("❌ No meetingId found in params.");
         return;
       }
 
       try {
-        // Fetch transcripts
+       
         const transcriptRes = await axios.get(
           `http://localhost:5000/api/transcripts/${meetingId}`,
           { headers: { Authorization: `Bearer ${token}` } }
@@ -33,15 +34,21 @@ const MeetDetails = () => {
         console.log("📄 Transcripts response:", transcriptRes.data);
         setTranscripts(transcriptRes.data || []);
 
-        // Fetch summary
-        const summaryRes = await axios.get(
-          `http://localhost:5000/api/summary/${meetingId}`,
+        
+        const summaryRes = await axios.post(
+          `http://localhost:5000/api/transcripts/summarize`,
+          { meetingId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
+
         console.log("📑 Summary response:", summaryRes.data);
+        console.log("🧾 Summary content:", summaryRes.data.summary);
         setSummary(summaryRes.data.summary || "");
       } catch (error) {
         console.error("❌ Error fetching meeting details:", error);
+        if (error.response) {
+          console.error("🔍 Backend response error:", error.response.data);
+        }
       }
     };
 
@@ -52,7 +59,7 @@ const MeetDetails = () => {
     <div className="meet-container">
       <h1 className="meet-title">📋 Meeting Details</h1>
 
-      {/* Transcripts */}
+      
       <section className="meet-section">
         <h2>🗣️ Meeting Transcripts</h2>
         <div className="meet-transcripts">
@@ -68,11 +75,11 @@ const MeetDetails = () => {
         </div>
       </section>
 
-      {/* Summary */}
+      
       <section className="meet-section">
         <h2>🧾 Meeting Summary</h2>
         <div className="meet-summary">
-          {summary ? (
+          {summary?.trim() ? (
             <p>{summary}</p>
           ) : (
             <p className="meet-empty">Summary not available.</p>
@@ -84,6 +91,9 @@ const MeetDetails = () => {
 };
 
 export default MeetDetails;
+
+
+
 
 
 

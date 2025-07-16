@@ -27,3 +27,14 @@ server/venv/
 *.jar
 *.dll
 *.lib
+
+# Ignore LLM model files
+server/llms/
+server/*.gguf.cache
+
+# Logs and temp
+*.log
+*.tmp
+# IDE/editor configs
+.vscode/
+*.code-workspace

@@ -5,7 +5,7 @@ const { google } = require("googleapis");
 const CalendarToken = require("../models/CalendarToken");
 const jwt = require("jsonwebtoken");
 
-// Step 1: Start OAuth Flow
+
 router.get("/authorize", (req, res) => {
   const token = req.query.token;
   if (!token) return res.status(401).send("Token missing");
@@ -14,13 +14,13 @@ router.get("/authorize", (req, res) => {
     access_type: "offline",
     scope: ["https://www.googleapis.com/auth/calendar.readonly"],
     prompt: "consent",
-    state: token, // Pass JWT token as state
+    state: token, 
   });
 
   res.redirect(url);
 });
 
-// Step 2: OAuth Callback
+
 router.get("/oauth2callback", async (req, res) => {
   const { code, state } = req.query;
   if (!state) return res.status(401).send("JWT token not provided");
@@ -48,7 +48,7 @@ router.get("/oauth2callback", async (req, res) => {
   res.redirect("http://localhost:3000/meeting-cards");
 });
 
-// Step 3: Fetch GMeet events using refresh token
+
 router.get("/events", async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -87,7 +87,7 @@ router.get("/events", async (req, res) => {
           event.conferenceData?.entryPoints?.find(e => e.entryPointType === "video")?.uri ||
           null;
 
-        // ✅ Extract Meet ID from the URL (e.g. https://meet.google.com/abc-defg-hij)
+       
         let meetId = null;
         if (meetUrl) {
           const match = meetUrl.match(/\/([a-z]{3}-[a-z]{4}-[a-z]{3})/);
@@ -100,7 +100,7 @@ router.get("/events", async (req, res) => {
           owner: event.organizer?.email || "Unknown",
           time: new Date(event.start?.dateTime || event.start?.date).toString(),
           meetLink: meetUrl,
-          meetId: meetId, // ✅ Include extracted Meet ID
+          meetId: meetId, 
           attendees: (event.attendees || []).map(a => ({
             email: a.email,
             name: a.displayName || null,

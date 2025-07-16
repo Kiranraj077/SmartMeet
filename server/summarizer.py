@@ -1,54 +1,40 @@
-# summarizer.py
-
 import sys
-from transformers import pipeline
+from ctransformers import AutoModelForCausalLM
 
-def split_text(text, max_len=1000):
-    words = text.split()
-    chunks, curr = [], ""
-    for w in words:
-        if len(curr) + len(w) + 1 > max_len:
-            chunks.append(curr)
-            curr = w
-        else:
-            curr += (" " + w) if curr else w
-    if curr:
-        chunks.append(curr)
-    return chunks
 
-def main():
-    # Read full transcript from stdin
-    full_text = sys.stdin.read()
+model = AutoModelForCausalLM.from_pretrained(
+    "./llms/mistral-7b-instruct-v0.2.Q4_K_M.gguf",  # ⬅️ update path/filename if needed
+    model_type="mistral",
+    max_new_tokens=512,
+    temperature=0.7,
+    repetition_penalty=1.1,
+    stop=["</s>"]
+)
 
-    if not full_text.strip():
-        print("No content provided to summarize.")
-        return
-
-    # Initialize summarizer (using DistilBART)
-    summarizer = pipeline(
-        "summarization",
-        model="sshleifer/distilbart-cnn-12-6",
-        framework="pt"  # Use PyTorch backend
+def build_prompt(text):
+    return (
+        "You are an assistant that summarizes meeting conversations. "
+        "Write a natural, human-readable summary of the discussion below. "
+        "Do not repeat the dialogue; instead, explain what happened as a narrative:\n\n"
+        f"{text.strip()}\n\nSummary:"
     )
 
-    chunks = split_text(full_text, max_len=1000)
 
-    # Summarize each chunk
-    summaries = []
-    for chunk in chunks:
-        try:
-            summary = summarizer(
-                chunk,
-                max_length=150,
-                min_length=40,
-                do_sample=False
-            )
-            summaries.append(summary[0]["summary_text"])
-        except Exception as e:
-            summaries.append("[Summary failed for chunk]")
+def main():
+    full_text = sys.stdin.read()
+    if not full_text.strip():
+        print("No input received.")
+        return
 
-    final_summary = "\n".join(summaries)
-    print(final_summary)
+    prompt = build_prompt(full_text)
+    summary = model(prompt)
+    print(summary.strip())
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
