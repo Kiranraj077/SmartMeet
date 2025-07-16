@@ -4,10 +4,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 
-// Load environment variables
+
 dotenv.config();
 
-// Connect to MongoDB
+
 connectDB();
 
 const app = express();
@@ -24,7 +24,7 @@ const calendarRoutes = require("./routes/calendarRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/transcripts", transcriptRoutes);
-app.use("/api/calendar", calendarRoutes); // ✅ Added calendar routes
+app.use("/api/calendar", calendarRoutes); 
 
 
 app.get("/", (req, res) => {

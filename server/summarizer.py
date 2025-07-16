@@ -3,7 +3,7 @@ from ctransformers import AutoModelForCausalLM
 
 
 model = AutoModelForCausalLM.from_pretrained(
-    "./llms/mistral-7b-instruct-v0.2.Q4_K_M.gguf",  # ⬅️ update path/filename if needed
+    "./llms/mistral-7b-instruct-v0.2.Q4_K_M.gguf", 
     model_type="mistral",
     max_new_tokens=512,
     temperature=0.7,

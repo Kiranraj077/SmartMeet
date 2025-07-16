@@ -24,7 +24,7 @@ const summarizeTranscript = async (req, res) => {
     console.log("🧩 Combined transcript length:", fullText.length);
 
     
-    const pythonPath = "python"; // Use 'python' if that's what works on your system
+    const pythonPath = "python"; 
     const scriptPath = path.join(__dirname, "../summarizer.py");
 
     console.log("⚙️ Spawning Python summarizer...");
@@ -55,7 +55,7 @@ const summarizeTranscript = async (req, res) => {
       res.json({ summary: summaryOutput.trim() });
     });
 
-    // Send the full transcript to the Python script via stdin
+   
     summarizer.stdin.write(fullText);
     summarizer.stdin.end();
 
