@@ -8,10 +8,10 @@ const getMeetId = () => {
     const tryGetMeetId = () => {
       const meetId = extractMeetIdFromUrl();
       if (meetId) {
-        console.log("🆔 Meet ID (from URL):", meetId);
+        console.log("Meet ID (from URL):", meetId);
         resolve(meetId);
       } else {
-        console.warn("⌛ Retrying Meet ID extraction...");
+        console.warn(" Retrying Meet ID extraction...");
         setTimeout(tryGetMeetId, 1000);
       }
     };
@@ -26,22 +26,22 @@ const observeCaptions = async () => {
   const targetNode = document.querySelector(targetSelector);
 
   if (!targetNode) {
-    console.warn("❌ Captions container not found. Retrying in 1s...");
+    console.warn("Captions container not found. Retrying in 1s...");
     setTimeout(observeCaptions, 1000);
     return;
   }
 
-  console.log("✅ Captions container found.");
+  console.log("Captions container found.");
 
   try {
     globalMeetId = await getMeetId();
-    console.log(`📋 Meet ID: ${globalMeetId}`);
+    console.log(`Meet ID: ${globalMeetId}`);
   } catch (error) {
-    console.warn("⚠️ Meet ID extraction failed:", error);
+    console.warn(" Meet ID extraction failed:", error);
     globalMeetId = "unknown-meeting";
   }
 
-  console.log("📡 Listening for all speaker captions...");
+  console.log("Listening for all speaker captions...");
 
   let currentSpeaker = null;
   let currentTranscript = '';
@@ -55,7 +55,7 @@ const observeCaptions = async () => {
         transcript: currentTranscript
       };
 
-      console.log("📤 Sending transcript to backend:", payload);
+      console.log("Sending transcript to backend:", payload);
 
       fetch("http://localhost:5000/api/transcripts", {
         method: "POST",
@@ -66,10 +66,10 @@ const observeCaptions = async () => {
       })
         .then(async (res) => {
           const data = await res.json().catch(() => ({}));
-          console.log("✅ Server response:", res.status, data);
+          console.log("Server response:", res.status, data);
         })
         .catch((err) => {
-          console.error("❌ Network error while sending transcript:", err);
+          console.error("Network error while sending transcript:", err);
         });
     }
   };
@@ -95,7 +95,7 @@ const observeCaptions = async () => {
     if (!latestSpeaker || !latestTranscript) return;
 
     if (currentSpeaker !== latestSpeaker) {
-      console.log(`🔄 Speaker switched: ${currentSpeaker} ➡️ ${latestSpeaker}`);
+      console.log(`Speaker switched: ${currentSpeaker}  ${latestSpeaker}`);
       if (currentSpeaker && currentTranscript) {
         logCurrentSpeaker();
       }
@@ -108,7 +108,7 @@ const observeCaptions = async () => {
     if (inactivityTimeout) clearTimeout(inactivityTimeout);
 
     inactivityTimeout = setTimeout(() => {
-      console.log("⏳ Inactivity timeout triggered");
+      console.log("Inactivity timeout triggered");
       logCurrentSpeaker();
       currentSpeaker = null;
       currentTranscript = '';
@@ -138,7 +138,7 @@ const startObserverWithRetry = () => {
       clearInterval(retryInterval);
       observeCaptions();
     } else {
-      console.log("🔍 Waiting for Captions container...");
+      console.log("Waiting for Captions container...");
     }
   }, 1000);
 };
