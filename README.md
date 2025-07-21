@@ -1,3 +1,4 @@
+<!--
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -83,3 +84,4 @@ The AI Agent is based on [Ollama](https://ollama.com/), [CrewAI](https://github.
 
 
 This project uses `crewai==0.130.0`, which **does not support YAML config files** or the `crewai create` CLI. If you try to use [agents.yaml](https://github.com/Kiranraj077/SmartMeet/blob/master/server/meeting_automation/src/meeting_automation/config/agents.yaml) and [tasks.yaml](https://github.com/Kiranraj077/SmartMeet/blob/master/server/meeting_automation/src/meeting_automation/config/tasks.yaml), you will face errors.Those features are only available in unreleased development branches, not on PyPI. For this reason, the agent is fully implemented in Python code via [main.py](https://github.com/Kiranraj077/SmartMeet/blob/master/server/meeting_automation/src/meeting_automation/main.py)
+-->
