@@ -1,0 +1,7 @@
+transcript:
+  - speaker: Alice
+    text: Hello everyone, let's start with the progress update.
+  - speaker: Bob
+    text: I completed the frontend design and pushed it to GitHub.
+  - speaker: Charlie
+    text: The backend API is 90% complete. Just testing left.

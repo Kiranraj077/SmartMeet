@@ -1,0 +1,31 @@
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class EmailAgent:
+    def __init__(self):
+        self.smtp_server = os.getenv("EMAIL_HOST")
+        self.smtp_port = int(os.getenv("EMAIL_PORT"))
+        self.email_address = os.getenv("EMAIL_ADDRESS")
+        self.email_password = os.getenv("EMAIL_PASSWORD")
+
+    def send_email(self, to_address, subject, body):
+        msg = MIMEMultipart()
+        msg['From'] = self.email_address
+        msg['To'] = to_address
+        msg['Subject'] = subject
+
+        msg.attach(MIMEText(body, 'plain'))
+
+        try:
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.email_address, self.email_password)
+                server.send_message(msg)
+                print(f"✅ Email sent to {to_address}")
+        except Exception as e:
+            print(f"❌ Failed to send email to {to_address}: {e}")

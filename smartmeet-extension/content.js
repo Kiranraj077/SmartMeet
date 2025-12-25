@@ -11,7 +11,7 @@ const getMeetId = () => {
         console.log("Meet ID (from URL):", meetId);
         resolve(meetId);
       } else {
-        console.warn(" Retrying Meet ID extraction...");
+        console.warn("Retrying Meet ID extraction...");
         setTimeout(tryGetMeetId, 1000);
       }
     };
@@ -37,7 +37,7 @@ const observeCaptions = async () => {
     globalMeetId = await getMeetId();
     console.log(`Meet ID: ${globalMeetId}`);
   } catch (error) {
-    console.warn(" Meet ID extraction failed:", error);
+    console.warn("Meet ID extraction failed:", error);
     globalMeetId = "unknown-meeting";
   }
 
@@ -51,13 +51,13 @@ const observeCaptions = async () => {
     if (currentSpeaker && currentTranscript) {
       const payload = {
         meetingId: globalMeetId,
-        speaker: currentSpeaker,
-        transcript: currentTranscript
+        transcript: `[${currentSpeaker}] ${currentTranscript}`,
+        attendees: [] // Optionally add emails here
       };
 
       console.log("Sending transcript to backend:", payload);
 
-      fetch("http://localhost:5000/api/transcripts", {
+      fetch("http://localhost:8000/api/transcripts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -95,7 +95,7 @@ const observeCaptions = async () => {
     if (!latestSpeaker || !latestTranscript) return;
 
     if (currentSpeaker !== latestSpeaker) {
-      console.log(`Speaker switched: ${currentSpeaker}  ${latestSpeaker}`);
+      console.log(`Speaker switched: ${currentSpeaker} → ${latestSpeaker}`);
       if (currentSpeaker && currentTranscript) {
         logCurrentSpeaker();
       }

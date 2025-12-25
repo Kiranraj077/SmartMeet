@@ -16,7 +16,7 @@ const Login = () => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch("http://localhost:8000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -25,16 +25,23 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
-        
+        // Save SmartMeet token locally
         localStorage.setItem("token", data.token);
+        localStorage.setItem("email", data.email);
         localStorage.setItem("userId", data.userId);
 
-        
-        navigate("/meeting-cards");
+        // ✅ Redirect based on whether Google consent is required
+        if (data.google_consent_required) {
+          // Instead of calling backend directly, go to frontend consent page
+          navigate("/google-consent");
+        } else {
+          navigate("/meeting-cards");
+        }
       } else {
-        setError(data.message || "Login failed");
+        setError(data.detail || "Login failed");
       }
     } catch (err) {
+      console.error("Login error:", err);
       setError("Something went wrong. Please try again.");
     }
   };
@@ -42,15 +49,27 @@ const Login = () => {
   return (
     <div className="auth-container">
       <h2>Login</h2>
+
       <form onSubmit={handleSubmit}>
-        <input name="email" placeholder="Email" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+        <input
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={handleChange}
+          required
+        />
         <button type="submit">Login</button>
       </form>
+
       {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
     </div>
   );
 };
 
 export default Login;
-

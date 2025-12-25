@@ -1,0 +1,8 @@
+{
+  "host": "Alice",
+  "transcript": [
+    { "speaker": "Alice", "text": "Let's finalize the landing page by Friday." },
+    { "speaker": "Bob", "text": "I'll handle writing the backend API." },
+    { "speaker": "Charlie", "text": "I'll prepare a marketing strategy document." }
+  ]
+}

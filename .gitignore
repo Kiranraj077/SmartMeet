@@ -38,3 +38,10 @@ server/*.gguf.cache
 # IDE/editor configs
 .vscode/
 *.code-workspace
+
+
+backend/venv/
+
+
+backend/.env
+

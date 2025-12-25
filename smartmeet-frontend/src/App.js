@@ -1,13 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-
 import HomePage from "./pages/HomePage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import MeetDetails from "./pages/MeetDetails";
 import MeetCards from "./pages/MeetCards";
-
+import GoogleConsent from "./pages/GoogleConsent"; // <-- new import
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -18,7 +17,9 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
 
-      
+      {/* Google Calendar one-time consent (keep this public) */}
+      <Route path="/google-consent" element={<GoogleConsent />} />
+
       <Route
         path="/meeting-cards"
         element={
@@ -28,7 +29,7 @@ function App() {
         }
       />
       <Route
-        path="/meet-details/:meetId"  
+        path="/meet-details/:meetId"
         element={
           <ProtectedRoute>
             <MeetDetails />
@@ -40,7 +41,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
